@@ -8,6 +8,7 @@ const mock = require('mock-fs')
 const nonexistentFile = tempfile('.json')
 
 let existentJSONFile = path.resolve(process.cwd(), 'existent.json')
+let otherJSONFile = path.resolve(process.cwd(), 'other.json')
 let syntaxErrorFile = path.resolve(process.cwd(), 'syntax-error.json')
 let hookFileWithContent = path.resolve(process.cwd(), 'hook-with-content')
 let hookFileWithoutContent = path.resolve(process.cwd(), 'hook-without-content')
@@ -15,6 +16,7 @@ let hookFileWithoutContent = path.resolve(process.cwd(), 'hook-without-content')
 test.before('mock file', (t) => {
   mock({
     'existent.json': '{"a": 1}',
+    'other.json': '{"a": "a"}',
     'syntax-error.json': 'abc',
     'hook-with-content': '#gitmit',
     'hook-without-content': ''
@@ -64,7 +66,7 @@ test('#readFile: should get an error if read a syntax error file with parameter 
 })
 
 test('#readFile: should get an error if read a JSON file with parameter 1', async (t) => {
-  const error = await t.throws(util.readFile(existentJSONFile, 1))
+  const error = await t.throws(util.readFile(otherJSONFile, 1))
 
   t.is(error.message, 'parameter parse is not a function.')
 })
