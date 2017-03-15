@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const axios = require('axios')
 const ora = require('ora')
+const util = require('../utils/util')
 
 const rawUrl = 'https://raw.githubusercontent.com/sqrthree/gitmit/master/src/data/gitmojis.json'
 const cacheFile = path.resolve(__dirname, '../data/gitmojis.json')
@@ -26,7 +27,7 @@ const update = function update() {
     })
   }).catch((err) => {
     spinner.fail('Failed to fetch data.')
-    console.error(err)
+    util.print(err, 'error')
   })
 }
 

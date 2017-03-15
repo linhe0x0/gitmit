@@ -1,4 +1,6 @@
 const fs = require('fs')
+const p = require('path')
+const chalk = require('chalk')
 
 /**
  * Verify whether the specified file exists.
@@ -63,7 +65,7 @@ exports.writeFile = function writeFile(path, cont, options = {}) {
 }
 
 /**
- * check if hook exists
+ * check whether the hook exists
  *
  * @param  {String} hook file path
  * @return {Boolean}
@@ -91,4 +93,32 @@ exports.getHookFilePath = function getHookFilePath() {
   const hookFilePath = `${cwd}/.git/hooks/${hookFile}`
 
   return hookFilePath
+}
+
+/**
+ * Check whether the specified directory is a Git repository.
+ *
+ * @param  {String}  dir
+ * @return {Promise}
+ */
+exports.isGitRepo = function isGitDirectory(dir) {
+  const dirname = p.resolve(dir, '.git')
+
+  return exports.exists(dirname)
+}
+
+exports.print = function print(message, type = 'defaults') {
+  const TEST_ENV = (process.env.NODE_ENV === 'testing')
+
+  const types = {
+    defaults: 'gray',
+    primary: 'blue',
+    success: 'green',
+    warning: 'yellow',
+    error: 'red',
+  }
+
+  /* eslint no-console: ["error", { allow: ["log"] }] */
+  console.log()
+  return TEST_ENV ? message : console.log(chalk[types[type]](message))
 }

@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/sqrthree/gitmit/badge.svg?branch=master)](https://coveralls.io/github/sqrthree/gitmit?branch=master)
 [![gitmoji badge](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat)](https://gitmoji.carloscuesta.me/)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat)](https://github.com/semantic-release/semantic-release)
 
 > gitmit是一个交互式命令行工具，让你可以轻松使用 emoji 表情和规范性的 commit message 格式。灵感来自 [gitmoji.carloscuesta.me](https://gitmoji.carloscuesta.me/) 和 [commitizen.github.io/cz-cli](http://commitizen.github.io/cz-cli/)。
 

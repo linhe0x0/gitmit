@@ -133,6 +133,12 @@ const gitHook = function gitHook(options, COMMIT_EDITMSG) {
  */
 const main = function main(options) {
   co(function* fn() {
+    const isGitRepo = yield util.isGitRepo(process.cwd())
+
+    if (!isGitRepo) {
+      return Promise.reject(new Error('This directory is not a git repository.'))
+    }
+
     if (!options.byHook) {
       // without parameter `--by-hook`
       // check if hook exists.
@@ -173,13 +179,11 @@ const main = function main(options) {
   }).then((result) => {
     // Variable result will have value when exec git command.
     if (result) {
-      console.log()
-      console.log(chalk.green(result.stdout))
+      util.print(result.stdout, 'success')
     }
-  }, (err) => {
-    console.log(chalk.red(err.stdout || err))
+  }).catch((err) => {
+    util.print(err.message, 'error')
   })
-  .catch(console.error)
 }
 
 module.exports = main
