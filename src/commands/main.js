@@ -179,13 +179,11 @@ const main = function main(options) {
   }).then((result) => {
     // Variable result will have value when exec git command.
     if (result) {
-      console.log()
-      console.log(chalk.green(result.stdout))
+      util.print(result.stdout, 'success')
     }
-  }, (err) => {
-    console.log(chalk.red(err.stdout || err))
+  }).catch((err) => {
+    util.print(err.message, 'error')
   })
-  .catch(console.error)
 }
 
 module.exports = main

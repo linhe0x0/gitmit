@@ -8,6 +8,7 @@ const { gitmojis } = require('../data/gitmojis')
  */
 const printMojiList = function printMojiList(data) {
   data.forEach((item) => {
+    /* eslint no-console: ["error", { allow: ["log"] }] */
     console.log(`${item.emoji}  - ${chalk.blue(item.code)} - ${item.description}`)
   })
 }

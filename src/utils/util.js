@@ -1,5 +1,6 @@
 const fs = require('fs')
 const p = require('path')
+const chalk = require('chalk')
 
 /**
  * Verify whether the specified file exists.
@@ -104,4 +105,22 @@ exports.isGitRepo = function isGitDirectory(dir) {
   const dirname = p.resolve(dir, '.git')
 
   return exports.exists(dirname)
+}
+
+exports.print = function print(message, type = 'defaults') {
+  const TEST_ENV = (process.env.NODE_ENV === 'testing')
+
+  if (TEST_ENV) return message
+
+  const types = {
+    defaults: 'gray',
+    primary: 'blue',
+    success: 'green',
+    warning: 'yellow',
+    error: 'red',
+  }
+
+  /* eslint no-console: ["error", { allow: ["log"] }] */
+  console.log()
+  return console.log(chalk[types[type]](message))
 }

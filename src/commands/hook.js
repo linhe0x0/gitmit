@@ -1,4 +1,3 @@
-const chalk = require('chalk')
 const util = require('../utils/util')
 
 /**
@@ -42,9 +41,11 @@ const init = function init(options) {
     // Add gitmit hook to file "prepare-commit-msg"
     return util.writeFile(hookFilePath, hookFileContent, { mode: 0o775, flag: 'a+' })
   }).then(() => {
-    console.log(`${chalk.yellow('gitmoji')} commit hook created succesfully.`)
+    util.print('gitmit commit hook created succesfully.', 'success')
   })
-  .catch(console.error)
+  .catch((err) => {
+    util.print(err, 'error')
+  })
 }
 
 /**
@@ -58,8 +59,10 @@ const remove = function remove() {
 
     return util.writeFile(hookFilePath, cont)
   }).then(() => {
-    console.log('Remove gitmit hook succesfully.')
-  }).catch(console.error)
+    util.print('Remove gitmit hook succesfully.', 'success')
+  }).catch((err) => {
+    util.print(err, 'error')
+  })
 }
 
 /**
@@ -75,7 +78,7 @@ const hook = function hook(options) {
     // Remove gitmit from git commit hook.
     remove()
   } else {
-    console.log('You need to run this command with --init or --remove.')
+    util.print('You need to run this command with --init or --remove.', 'error')
   }
 }
 
