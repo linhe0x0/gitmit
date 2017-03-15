@@ -110,8 +110,6 @@ exports.isGitRepo = function isGitDirectory(dir) {
 exports.print = function print(message, type = 'defaults') {
   const TEST_ENV = (process.env.NODE_ENV === 'testing')
 
-  if (TEST_ENV) return message
-
   const types = {
     defaults: 'gray',
     primary: 'blue',
@@ -122,5 +120,5 @@ exports.print = function print(message, type = 'defaults') {
 
   /* eslint no-console: ["error", { allow: ["log"] }] */
   console.log()
-  return console.log(chalk[types[type]](message))
+  return TEST_ENV ? message : console.log(chalk[types[type]](message))
 }

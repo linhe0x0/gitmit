@@ -115,3 +115,9 @@ test('#isGitRepo: should return false if is not in a git directory.', async (t) 
 
   t.false(result)
 })
+
+test('#print', (t) => {
+  const result = util.print('some things')
+
+  t.true(result === 'some things')
+})
