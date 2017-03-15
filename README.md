@@ -46,7 +46,7 @@ If you want to use emoji in commit message such as [github.com/sqrthree/gitmit](
 $ gitmit -e
 ```
 
-### commit with convention
+### Commit with convention
 
 As you know, lots of projects have some commit message conventions. when you use `gitmit` with `-c` option, you'll be prompted to fill out any required commit fields at commit time. No more digging through CONTRIBUTING.md to find what the preferred format is.
 
@@ -63,7 +63,7 @@ $ gitmit -c -e
 
 Default, we will use [AngularJS's commit message convention](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). but you can custom your own conventions with a `.conventional-commit-types.json` file.
 
-If your project directory has a `.conventional-commit-types.json` file such as [github.com/sqrthree/gitmit/blob/master/src/data/conventional-commit-types.json](https://github.com/sqrthree/gitmit/blob/master/src/data/conventional-commit-types.json), `gitmit` will autoload your custom file when you run it in this directory.
+If your project directory has a `.conventional-commit-types.json` file such as [src/data/conventional-commit-types.json](https://github.com/sqrthree/gitmit/blob/master/src/data/conventional-commit-types.json), `gitmit` will autoload your custom file when you run it in this directory.
 
 If you want to keep it wherever you are, yon can create a `.conventional-commit-types.json` file in your home directory, `gitmit` will autoload it.
 
