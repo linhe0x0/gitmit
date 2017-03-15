@@ -56,9 +56,9 @@ $ gitmit -c -e
 
 ### 自定义 commit 信息格式
 
-`gitmit` 默认使用 [Angular 团队](https://github.com/angular/angular/commits/master) 的提交规范，当然，你也可以根据自己的项目需要自定义规范。只需要在当前项目文件夹中创建一个 `.conventional-commit-types.json` 文件即可。文件内容格式请参考 [github.com/sqrthree/gitmit/blob/master/src/data/conventional-commit-types.json](https://github.com/sqrthree/gitmit/blob/master/src/data/conventional-commit-types.json)。
+`gitmit` 默认使用 [Angular 团队](https://github.com/angular/angular/commits/master) 的提交规范，当然，你也可以根据自己的项目需要自定义规范。只需要在当前项目文件夹中创建一个 `.conventional-commit-types.json` 文件即可。文件内容格式请参考 [src/data/conventional-commit-types.json](https://github.com/sqrthree/gitmit/blob/master/src/data/conventional-commit-types.json)。
 
-如果觉得每个项目都创建一个太麻烦，也可以在自己的用户目录下创建一个 `.conventional-commit-types.json` 文件。程序会按照 **当前目录** => **用户目录** => ** 默认文件** 的顺序进行查找。
+如果觉得每个项目都创建一个太麻烦，也可以在自己的用户目录下创建一个 `.conventional-commit-types.json` 文件。程序会按照 **当前目录** => **用户目录** => **默认文件** 的顺序进行查找。
 
 ### 搜索表情
 
