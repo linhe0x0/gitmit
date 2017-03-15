@@ -21,7 +21,7 @@ test.before('mock file', (t) => {
     'syntax-error.json': 'abc',
     'hook-with-content': '#gitmit',
     'hook-without-content': '',
-    'git-repo/.git': {}
+    'git-repo/.git': {},
   })
 })
 
