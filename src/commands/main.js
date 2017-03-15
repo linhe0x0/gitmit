@@ -133,6 +133,12 @@ const gitHook = function gitHook(options, COMMIT_EDITMSG) {
  */
 const main = function main(options) {
   co(function* fn() {
+    const isGitRepo = yield util.isGitRepo(process.cwd())
+
+    if (!isGitRepo) {
+      return Promise.reject(new Error('This directory is not a git repository.'))
+    }
+
     if (!options.byHook) {
       // without parameter `--by-hook`
       // check if hook exists.

@@ -1,4 +1,5 @@
 const fs = require('fs')
+const p = require('path')
 
 /**
  * Verify whether the specified file exists.
@@ -63,7 +64,7 @@ exports.writeFile = function writeFile(path, cont, options = {}) {
 }
 
 /**
- * check if hook exists
+ * check whether the hook exists
  *
  * @param  {String} hook file path
  * @return {Boolean}
@@ -91,4 +92,16 @@ exports.getHookFilePath = function getHookFilePath() {
   const hookFilePath = `${cwd}/.git/hooks/${hookFile}`
 
   return hookFilePath
+}
+
+/**
+ * Check whether the specified directory is a Git repository.
+ *
+ * @param  {String}  dir
+ * @return {Promise}
+ */
+exports.isGitRepo = function isGitDirectory(dir) {
+  const dirname = p.resolve(dir, '.git')
+
+  return exports.exists(dirname)
 }

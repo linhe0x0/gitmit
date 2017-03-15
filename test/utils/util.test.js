@@ -7,11 +7,12 @@ const mock = require('mock-fs')
 
 const nonexistentFile = tempfile('.json')
 
-let existentJSONFile = path.resolve(process.cwd(), 'existent.json')
-let otherJSONFile = path.resolve(process.cwd(), 'other.json')
-let syntaxErrorFile = path.resolve(process.cwd(), 'syntax-error.json')
-let hookFileWithContent = path.resolve(process.cwd(), 'hook-with-content')
-let hookFileWithoutContent = path.resolve(process.cwd(), 'hook-without-content')
+const existentJSONFile = path.resolve(process.cwd(), 'existent.json')
+const otherJSONFile = path.resolve(process.cwd(), 'other.json')
+const syntaxErrorFile = path.resolve(process.cwd(), 'syntax-error.json')
+const hookFileWithContent = path.resolve(process.cwd(), 'hook-with-content')
+const hookFileWithoutContent = path.resolve(process.cwd(), 'hook-without-content')
+const gitRepo = path.resolve(process.cwd(), 'git-repo')
 
 test.before('mock file', (t) => {
   mock({
@@ -19,7 +20,8 @@ test.before('mock file', (t) => {
     'other.json': '{"a": "a"}',
     'syntax-error.json': 'abc',
     'hook-with-content': '#gitmit',
-    'hook-without-content': ''
+    'hook-without-content': '',
+    'git-repo/.git': {}
   })
 })
 
@@ -100,4 +102,16 @@ test('#getHookFilePath', async (t) => {
   const result = await util.getHookFilePath()
 
   t.is(result, `${cwd}/.git/hooks/prepare-commit-msg`)
+})
+
+test('#isGitRepo: should return true if is in a git directory.', async (t) => {
+  const result = await util.isGitRepo(path.resolve(process.cwd(), gitRepo))
+
+  t.true(result)
+})
+
+test('#isGitRepo: should return false if is not in a git directory.', async (t) => {
+  const result = await util.isGitRepo(path.resolve(process.cwd(), 'not-a-git-repo'))
+
+  t.false(result)
 })
