@@ -3,6 +3,7 @@ const co = require('co')
 const inquirer = require('inquirer')
 const chalk = require('chalk')
 const execa = require('execa')
+const wrap = require('word-wrap')
 const gitmojiSupport = require('../utils/gitmoji-support')
 const conventionSupport = require('../utils/convention-support')
 const util = require('../utils/util')
@@ -68,12 +69,13 @@ const formatCommitMessage = function formatCommitMessage(options) {
   const type = options.type ? `${options.type}${scope}: ` : ''
   const gitmoji = options.gitmoji ? `${options.gitmoji} ` : ''
   const title = `${type}${gitmoji}${options.title}`
-  const reference = options.reference ? `(#${options.reference})` : ''
-  const body = `${options.body} ${reference}`
+  const reference = options.reference ? `Close #${options.reference}` : ''
+  const message = wrap(options.body, { width: 72, trim: true, indent: '' })
+  const body = `${message}\n\n${reference}`
 
   return {
     title,
-    body: body.trim(),
+    body,
   }
 }
 
