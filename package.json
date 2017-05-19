@@ -1,6 +1,6 @@
 {
   "name": "gitmit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "gitmit is a interactive command line tool so that you can easily use emoji and conventional commit format.",
   "keywords": [
     "git",
@@ -37,10 +37,9 @@
     "commander": "^2.9.0",
     "execa": "^0.6.1",
     "inquirer": "^3.0.6",
-    "mock-fs": "^4.2.0",
     "ora": "^1.1.0",
-    "should": "^11.2.1",
-    "update-notifier": "^2.1.0"
+    "update-notifier": "^2.1.0",
+    "word-wrap": "1.2.2"
   },
   "devDependencies": {
     "ava": "^0.18.2",
@@ -49,11 +48,11 @@
     "eslint": "^3.17.1",
     "eslint-config-airbnb-base": "^11.1.1",
     "eslint-plugin-import": "^2.2.0",
-    "mock-fs": "^4.1.0",
+    "mock-fs": "^4.2.0",
     "nyc": "^10.1.2",
     "pre-commit": "^1.2.2",
     "rewire": "^2.5.2",
-    "should": "^11.2.0",
+    "should": "^11.2.1",
     "temp-write": "^3.1.0",
     "tempfile": "^1.1.1"
   },

@@ -69,7 +69,7 @@ test('#formatCommitMessage: body', (t) => {
     body: 'body'
   })
 
-  result.body.should.equal('body (#1)')
+  result.body.should.equal('body\n\nClose #1')
 })
 
 test('#formatCommitMessage: body', (t) => {
@@ -87,7 +87,7 @@ test('#formatCommitMessage: body', (t) => {
     body: ''
   })
 
-  result.body.should.equal('(#1)')
+  result.body.should.equal('Close #1')
 })
 
 test('#gitCommit', (t) => {
