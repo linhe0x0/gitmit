@@ -71,7 +71,14 @@ const formatCommitMessage = function formatCommitMessage(options) {
   const title = `${type}${gitmoji}${options.title}`
   const reference = options.reference ? `Close #${options.reference}` : ''
   const message = wrap(options.body, { width: 72, trim: true, indent: '' })
-  const body = `${message}\n\n${reference}`
+
+  let body = ''
+
+  if (message) {
+    body = reference ? `${message}\n\n${reference}` : message
+  } else {
+    body = reference
+  }
 
   return {
     title,
