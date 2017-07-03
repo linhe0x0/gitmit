@@ -1,5 +1,7 @@
 # gitmit
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/sqrthree/gitmit.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/sqrthree/gitmit.svg?branch=master)](https://travis-ci.org/sqrthree/gitmit)
 [![Coverage Status](https://coveralls.io/repos/github/sqrthree/gitmit/badge.svg?branch=master)](https://coveralls.io/github/sqrthree/gitmit?branch=master)
 [![gitmoji badge](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat)](https://gitmoji.carloscuesta.me/)
