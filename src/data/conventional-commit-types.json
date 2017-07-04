@@ -32,6 +32,14 @@
     },
     "revert": {
       "description": "Reverts a previous commit"
+    },
+    "deps": {
+      "description": "Upgrading or Downgrading dependencies"
+    }
+  },
+  "scopes": {
+    "scope": {
+      "description": "the description of this scope"
     }
   }
 }
