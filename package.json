@@ -42,7 +42,7 @@
     "word-wrap": "1.2.3"
   },
   "devDependencies": {
-    "ava": "^0.18.2",
+    "ava": "^0.22.0",
     "coveralls": "^2.12.0",
     "del": "^3.0.0",
     "eslint": "^4.1.1",
