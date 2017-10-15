@@ -38,7 +38,8 @@ exports.readFile = function readFile(path, parse) {
 
       /* eslint no-shadow: ["error", { allow: ["err"] }] */
       try {
-        return resolve(parse(data))
+        var data = parse(data)
+        return resolve(data)
       } catch (err) {
         return reject(err)
       }

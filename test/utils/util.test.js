@@ -76,7 +76,7 @@ test('#readFile: should get an error if read a JSON file with parameter 1', asyn
 test('#writeFile: ', async (t) => {
   const error = await t.throws(util.writeFile(existentJSONFile, 'test', { flag: 'wx' }))
 
-  t.is(error.code, 'ENOENT')
+  t.is(error.code, 'EEXIST')
 })
 
 test('#writeFile: ', async (t) => {
