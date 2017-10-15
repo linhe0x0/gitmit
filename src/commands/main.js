@@ -177,7 +177,7 @@ const main = function main(options) {
 
     return yield inquirer.prompt(questions)
   }).then((answers) => {
-    if (!answers.confirm) return Promise.reject('Aborting commit.')
+    if (!answers.confirm) return Promise.reject(new Error('Aborting commit.'))
 
     if (options.byHook) {
       const COMMIT_EDITMSG = options.args[options.args.length - 1]

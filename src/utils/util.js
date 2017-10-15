@@ -38,8 +38,8 @@ exports.readFile = function readFile(path, parse) {
 
       /* eslint no-shadow: ["error", { allow: ["err"] }] */
       try {
-        var data = parse(data)
-        return resolve(data)
+        const result = parse(data)
+        return resolve(result)
       } catch (err) {
         return reject(err)
       }

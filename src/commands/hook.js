@@ -43,9 +43,9 @@ const init = function init(options) {
   }).then(() => {
     util.print('gitmit commit hook created succesfully.', 'success')
   })
-  .catch((err) => {
-    util.print(err, 'error')
-  })
+    .catch((err) => {
+      util.print(err, 'error')
+    })
 }
 
 /**
