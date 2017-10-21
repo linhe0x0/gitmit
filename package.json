@@ -31,7 +31,7 @@
     "lint": "eslint src --cache"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.17.0",
     "chalk": "^2.0.1",
     "co": "^4.6.0",
     "commander": "^2.9.0",
