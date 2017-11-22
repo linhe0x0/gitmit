@@ -51,7 +51,7 @@
     "mock-fs": "^4.2.0",
     "nyc": "^11.0.3",
     "pre-commit": "^1.2.2",
-    "rewire": "^2.5.2",
+    "rewire": "^3.0.0",
     "should": "^13.1.1",
     "temp-write": "^3.1.0",
     "tempfile": "^2.0.0"
