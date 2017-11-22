@@ -36,7 +36,7 @@
     "co": "^4.6.0",
     "commander": "^2.9.0",
     "execa": "^0.8.0",
-    "inquirer": "^3.0.6",
+    "inquirer": "^4.0.0",
     "ora": "^1.1.0",
     "update-notifier": "^2.1.0",
     "word-wrap": "1.2.3"
