@@ -1,6 +1,6 @@
 {
   "name": "gitmit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "gitmit is a interactive command line tool so that you can easily use emoji and conventional commit format.",
   "keywords": [
     "git",
