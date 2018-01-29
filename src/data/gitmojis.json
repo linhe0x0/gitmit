@@ -106,6 +106,20 @@
       "name": "checkered-flag"
     },
     {
+      "emoji": "🤖",
+      "entity": "&#129302;",
+      "code": ":robot:",
+      "description": "Fixing something on Android.",
+      "name": "robot"
+    },
+    {
+      "emoji": "🍏",
+      "entity": "&#127823;",
+      "code": ":green_apple:",
+      "description": "Fixing something on iOS.",
+      "name": "green-apple"
+    },
+    {
       "emoji": "🔖",
       "entity": "&#x1f516;",
       "code": ":bookmark:",
@@ -148,6 +162,13 @@
       "name": "arrow-up"
     },
     {
+      "emoji": "📌",
+      "entity": "&#x1F4CC;",
+      "code": ":pushpin:",
+      "description": "Pinning dependencies to specific versions.",
+      "name": "pushpin"
+    },
+    {
       "emoji": "👷",
       "entity": "&#x1f477;",
       "code": ":construction_worker:",
@@ -161,11 +182,11 @@
       "name": "chart-with-upwards-trend"
     },
     {
-      "emoji": "🔨",
-      "entity": "&#128736;",
-      "code": ":hammer:",
+      "emoji": "♻️",
+      "entity": "&#x2672;",
+      "code": ":recycle:",
       "description": "Refactoring code.",
-      "name": "hammer"
+      "name": "recycle"
     },
     {
       "emoji": "➖",
@@ -306,6 +327,62 @@
       "code": ":speech_balloon:",
       "description": "Updating text and literals.",
       "name": "speech-balloon"
+    },
+    {
+      "emoji": "🗃",
+      "entity": "&#128451;",
+      "code": ":card_file_box:",
+      "description": "Performing database related changes.",
+      "name": "card-file-box"
+    },
+    {
+      "emoji": "🔊",
+      "entity": "&#128266;",
+      "code": ":loud_sound:",
+      "description": "Adding logs.",
+      "name": "loud-sound"
+    },
+    {
+      "emoji": "🔇",
+      "entity": "&#128263;",
+      "code": ":mute:",
+      "description": "Removing logs.",
+      "name": "mute"
+    },
+    {
+      "emoji": "👥",
+      "entity": "&#128101;",
+      "code": ":busts_in_silhouette:",
+      "description": "Adding contributor(s).",
+      "name": "busts-in-silhouette"
+    },
+    {
+      "emoji": "🚸",
+      "entity": "&#128696;",
+      "code": ":children_crossing:",
+      "description": "Improving user experience / usability.",
+      "name": "children-crossing"
+    },
+    {
+      "emoji": "🏗",
+      "entity": "&#1f3d7;",
+      "code": ":building_construction:",
+      "description": "Making architectural changes.",
+      "name": "building-construction"
+    },
+    {
+      "emoji": "📱",
+      "entity": "&#128241;",
+      "code": ":iphone:",
+      "description": "Working on responsive design.",
+      "name": "iphone"
+    },
+    {
+      "emoji": "🤡",
+      "entity": "&#129313;",
+      "code": ":clown_face:",
+      "description": "Mocking things.",
+      "name": "clown-face"
     }
   ]
 }
