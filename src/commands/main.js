@@ -1,6 +1,7 @@
 const fs = require('fs')
 const co = require('co')
 const inquirer = require('inquirer')
+const inquirerAutocompletePrompt = require('inquirer-autocomplete-prompt')
 const chalk = require('chalk')
 const execa = require('execa')
 const wrap = require('word-wrap')
@@ -57,6 +58,8 @@ const questions = [
     default: 'yes',
   },
 ]
+
+inquirer.registerPrompt('autocomplete', inquirerAutocompletePrompt)
 
 /**
  * Format commit message with specified options.

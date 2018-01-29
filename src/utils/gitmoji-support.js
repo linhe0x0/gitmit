@@ -1,3 +1,4 @@
+const fuzzy = require('fuzzy')
 const { gitmojis } = require('../data/gitmojis')
 
 const mapGitmojisToChoices = function mapGitmojisToChoices(data) {
@@ -8,14 +9,30 @@ const mapGitmojisToChoices = function mapGitmojisToChoices(data) {
   }))
 }
 
-const gitmojiSupport = function gmojiSupport() {
+const searchEmoji = function searchEmoji(answers, input) {
   const choices = mapGitmojisToChoices(gitmojis)
 
+  input = input || ''
+
+  return new Promise(function(resolve) {
+    var fuzzyResult = fuzzy.filter(input, choices, {
+      extract: function(el) {
+        return el.short
+      }
+    })
+
+    resolve(fuzzyResult.map(function(el) {
+      return el.original
+    }))
+  })
+}
+
+const gitmojiSupport = function gmojiSupport() {
   return {
-    type: 'list',
+    type: 'autocomplete',
     name: 'gitmoji',
     message: 'Choose a gitmoji:',
-    choices,
+    source: searchEmoji,
   }
 }
 
