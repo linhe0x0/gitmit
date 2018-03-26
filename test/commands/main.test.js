@@ -14,7 +14,7 @@ test('#formatCommitMessage: title', (t) => {
     title: 'title'
   })
 
-  result.title.should.equal('type(scope): :bug: title')
+  result.title.should.equal(':bug: type(scope): title')
 })
 
 test('#formatCommitMessage: title', (t) => {
@@ -24,7 +24,7 @@ test('#formatCommitMessage: title', (t) => {
     title: 'title'
   })
 
-  result.title.should.equal('type: :bug: title')
+  result.title.should.equal(':bug: type: title')
 })
 
 test('#formatCommitMessage: title', (t) => {
