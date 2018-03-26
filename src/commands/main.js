@@ -71,7 +71,7 @@ const formatCommitMessage = function formatCommitMessage(options) {
   const scope = options.scope ? `(${options.scope})` : ''
   const type = options.type ? `${options.type}${scope}: ` : ''
   const gitmoji = options.gitmoji ? `${options.gitmoji} ` : ''
-  const title = `${type}${gitmoji}${options.title}`
+  const title = `${gitmoji}${type}${options.title}`
   const reference = options.reference ? `Close #${options.reference}` : ''
   const message = wrap(options.body, { width: 72, trim: true, indent: '' })
 
