@@ -115,5 +115,5 @@ test('#gitCommit', (t) => {
     signed: true
   })
 
-  result.should.be.equal('git commit -s -m "title" -m "body"')
+  result.should.be.equal('git commit -s -S -m "title" -m "body"')
 })
