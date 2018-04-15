@@ -106,6 +106,8 @@ const gitCommit = function gitCommit(options) {
     shell += `-m "${title}" -m "${body}"`
   }
 
+  shell = shell.replace(/`/g, '\\`')
+
   // test environment
   if (TEST_ENV) return shell
 
