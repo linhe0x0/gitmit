@@ -48,7 +48,7 @@ const questions = [
   {
     type: 'confirm',
     name: 'signed',
-    message: 'Signed commit (yes):',
+    message: 'Signed commit with GPG (yes):',
     default: 'yes',
   },
   {
@@ -101,7 +101,7 @@ const gitCommit = function gitCommit(options) {
   let shell = 'git commit '
 
   if (options.signed) {
-    shell += `-s -m "${title}" -m "${body}"`
+    shell += `-s -S -m "${title}" -m "${body}"`
   } else {
     shell += `-m "${title}" -m "${body}"`
   }
