@@ -40,7 +40,7 @@
     "inquirer": "^5.2.0",
     "inquirer-autocomplete-prompt": "^0.12.2",
     "ora": "^1.4.0",
-    "update-notifier": "^2.1.0",
+    "update-notifier": "^2.5.0",
     "word-wrap": "1.2.3"
   },
   "devDependencies": {
