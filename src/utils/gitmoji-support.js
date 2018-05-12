@@ -12,16 +12,16 @@ const mapGitmojisToChoices = function mapGitmojisToChoices(data) {
 const searchEmoji = function searchEmoji(answers, input) {
   const choices = mapGitmojisToChoices(gitmojis)
 
-  input = input || ''
+  const keyword = input || ''
 
-  return new Promise(function(resolve) {
-    var fuzzyResult = fuzzy.filter(input, choices, {
-      extract: function(el) {
+  return new Promise(function search(resolve) {
+    const fuzzyResult = fuzzy.filter(keyword, choices, {
+      extract: function extract(el) {
         return el.short
-      }
+      },
     })
 
-    resolve(fuzzyResult.map(function(el) {
+    resolve(fuzzyResult.map(function map(el) {
       return el.original
     }))
   })

@@ -2,7 +2,12 @@
 // Copy this file, and add rule overrides as needed.
 {
   "extends": "airbnb-base",
+  "env": {
+    "node": true,
+  },
   "rules": {
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "object-shorthand": 0,
+    "prefer-arrow-callback": 0
   }
 }
