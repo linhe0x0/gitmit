@@ -55,7 +55,7 @@
     "pre-commit": "^1.2.2",
     "rewire": "^3.0.0",
     "should": "^13.2.1",
-    "temp-write": "^3.1.0",
+    "temp-write": "^3.4.0",
     "tempfile": "^2.0.0"
   },
   "engines": {
