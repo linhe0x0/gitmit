@@ -123,3 +123,12 @@ exports.print = function print(message, type = 'defaults') {
   console.log()
   return TEST_ENV ? message : console.log(chalk[types[type]](message))
 }
+
+/**
+ * escape quotation marks
+ * @param  {String} str source string
+ * @return {String}     result
+ */
+exports.escapeQuotation = function escapeQuotation(str) {
+  return str.replace(/"/g, '\\"')
+}

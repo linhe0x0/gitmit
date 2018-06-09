@@ -96,7 +96,10 @@ const formatCommitMessage = function formatCommitMessage(options) {
  * @return {Promise}
  */
 const gitCommit = function gitCommit(options) {
-  const { title, body } = formatCommitMessage(options)
+  let { title, body } = formatCommitMessage(options)
+
+  title = util.escapeQuotation(title)
+  body = util.escapeQuotation(body)
 
   let shell = 'git commit '
 
