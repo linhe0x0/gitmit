@@ -1,5 +1,6 @@
 const fs = require('fs')
 const p = require('path')
+const childProcess = require('child_process')
 const chalk = require('chalk')
 
 /**
@@ -103,9 +104,15 @@ exports.getHookFilePath = function getHookFilePath() {
  * @return {Promise}
  */
 exports.isGitRepo = function isGitDirectory(dir) {
-  const dirname = p.resolve(dir, '.git')
+  return new Promise(function (resolve, reject) {
+    childProcess.exec('git rev-parse --is-inside-work-tree', function (err, stdout, stderr) {
+      if (err) return reject(err)
 
-  return exports.exists(dirname)
+      if (stderr) return reject(new Error(stderr))
+
+      return resolve(/true/.test(stdout))
+    })
+  })
 }
 
 exports.print = function print(message, type = 'defaults') {
