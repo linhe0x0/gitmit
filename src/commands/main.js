@@ -150,10 +150,11 @@ const gitHook = function gitHook(options, COMMIT_EDITMSG) {
  */
 const main = function main(options) {
   co(function* fn() {
-    const isGitRepo = yield util.isGitRepo(process.cwd())
+    const cwd = process.cwd()
+    const isGitRepo = yield util.isGitRepo(cwd)
 
     if (!isGitRepo) {
-      return Promise.reject(new Error('This directory is not a git repository.'))
+      return Promise.reject(new Error(`This operation must be run in a work tree.\nCurrent working directory "${cwd}" is outside of the work tree of the repository.`))
     }
 
     if (!options.byHook) {
