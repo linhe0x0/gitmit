@@ -30,19 +30,27 @@ exports.exists = function exists(path) {
 exports.readFile = function readFile(path, parse) {
   return new Promise((resolve, reject) => {
     fs.readFile(path, { encoding: 'utf8' }, (err, data) => {
-      if (err) return reject(err)
+      if (err) {
+        reject(err)
+        return
+      }
 
-      if (parse === undefined) return resolve(data)
+      if (parse === undefined) {
+        resolve(data)
+        return
+      }
 
-      if (typeof parse !== 'function')
-        return reject(new Error('parameter parse is not a function.'))
+      if (typeof parse !== 'function') {
+        reject(new Error('parameter parse is not a function.'))
+        return
+      }
 
       /* eslint no-shadow: ["error", { allow: ["err"] }] */
       try {
         const result = parse(data)
-        return resolve(result)
+        resolve(result)
       } catch (err) {
-        return reject(err)
+        reject(err)
       }
     })
   })
@@ -103,16 +111,30 @@ exports.getHookFilePath = function getHookFilePath() {
  * @param  {String}  dir
  * @return {Promise}
  */
-exports.isGitRepo = function isGitDirectory() {
+exports.isGitRepo = function isGitDirectory(cwd) {
   return new Promise((resolve, reject) => {
     childProcess.exec(
       'git rev-parse --is-inside-work-tree',
+      {
+        cwd,
+      },
       (err, stdout, stderr) => {
-        if (err) return reject(err)
+        if (err) {
+          if (err.message.indexOf('not a git repository') !== -1) {
+            resolve(false)
+            return
+          }
 
-        if (stderr) return reject(new Error(stderr))
+          reject(err)
+          return
+        }
 
-        return resolve(/true/.test(stdout))
+        if (stderr) {
+          reject(new Error(stderr))
+          return
+        }
+
+        resolve(stdout.indexOf(true) !== -1)
       }
     )
   })

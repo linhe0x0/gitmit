@@ -1,5 +1,6 @@
 const path = require('path')
-const { test } = require('ava')
+const os = require('os')
+const test = require('ava')
 const tempfile = require('tempfile')
 const util = require('../../src/utils/util')
 const mock = require('mock-fs')
@@ -14,7 +15,6 @@ const hookFileWithoutContent = path.resolve(
   process.cwd(),
   'hook-without-content'
 )
-const gitRepo = path.resolve(process.cwd(), 'git-repo')
 
 test.before('mock file', (t) => {
   mock({
@@ -51,7 +51,9 @@ test('#readFile: should get some contents if read an existent file', async (t) =
 })
 
 test('#readFile: should get an error if read a nonexistent file.', async (t) => {
-  const error = await t.throws(util.readFile(nonexistentFile))
+  const error = await t.throwsAsync(async () => {
+    await util.readFile(nonexistentFile)
+  })
 
   t.is(error.code, 'ENOENT')
 })
@@ -64,29 +66,33 @@ test('#readFile: should get an Object if read a JSON file with parameter JSON.pa
 })
 
 test('#readFile: should get an error if read a syntax error file with parameter JSON.parse', async (t) => {
-  const error = await t.throws(util.readFile(syntaxErrorFile, JSON.parse))
+  const error = await t.throwsAsync(async () => {
+    await util.readFile(syntaxErrorFile, JSON.parse)
+  })
 
   t.is(error.message, 'Unexpected token a in JSON at position 0')
 })
 
 test('#readFile: should get an error if read a JSON file with parameter 1', async (t) => {
-  const error = await t.throws(util.readFile(otherJSONFile, 1))
+  const error = await t.throwsAsync(async () => {
+    await util.readFile(otherJSONFile, 1)
+  })
 
   t.is(error.message, 'parameter parse is not a function.')
-})
-
-test('#writeFile: ', async (t) => {
-  const error = await t.throws(
-    util.writeFile(existentJSONFile, 'test', { flag: 'wx' })
-  )
-
-  t.is(error.code, 'EEXIST')
 })
 
 test('#writeFile: ', async (t) => {
   const path = await util.writeFile('./testing.txt', 'testing')
 
   t.is(path, './testing.txt')
+})
+
+test('#writeFile: exists', async (t) => {
+  const error = await t.throwsAsync(async () => {
+    await util.writeFile(existentJSONFile, 'test', { flag: 'wx' })
+  })
+
+  t.is(error.code, 'EEXIST')
 })
 
 test('#checkIfHookExists: should return true if check an hook file that has gitmit', async (t) => {
@@ -109,15 +115,13 @@ test('#getHookFilePath', async (t) => {
 })
 
 test('#isGitRepo: should return true if is in a git directory.', async (t) => {
-  const result = await util.isGitRepo(path.resolve(process.cwd(), gitRepo))
+  const result = await util.isGitRepo(path.resolve(process.cwd()))
 
   t.true(result)
 })
 
 test('#isGitRepo: should return false if is not in a git directory.', async (t) => {
-  const result = await util.isGitRepo(
-    path.resolve(process.cwd(), 'not-a-git-repo')
-  )
+  const result = await util.isGitRepo(os.tmpdir())
 
   t.false(result)
 })

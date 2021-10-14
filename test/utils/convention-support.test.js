@@ -1,7 +1,7 @@
 const fs = require('fs')
 const os = require('os')
 const path = require('path')
-const { test } = require('ava')
+const test = require('ava')
 const should = require('should')
 const rewire = require('rewire')
 const del = require('del')
@@ -12,7 +12,7 @@ const cwd = process.cwd()
 const mock = {
   create(path, content) {
     return new Promise((resolve, reject) => {
-      fs.writeFile(path, content, (err) => {
+      fs.writeFile(path, content || '', (err) => {
         if (err) return reject(err)
 
         resolve(path)
@@ -63,7 +63,7 @@ test.serial(
 
 test.serial(
   '#getConventionalFile: should return current directory if both current directory and home directory have file that named .conventional-commit-types.json',
-  async (t) => {
+  async () => {
     const home = await mock.create(
       path.resolve(homedir, '.conventional-commit-types.json')
     )

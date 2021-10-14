@@ -1,4 +1,4 @@
-const { test } = require('ava')
+const test = require('ava')
 const should = require('should')
 const gitmojiSupport = require('../../src/utils/gitmoji-support')
 

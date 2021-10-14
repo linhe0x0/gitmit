@@ -1,4 +1,4 @@
-const { test } = require('ava')
+const test = require('ava')
 const should = require('should')
 const rewire = require('rewire')
 const main = rewire('../../src/commands/main')
@@ -7,6 +7,52 @@ const formatCommitMessage = main.__get__('formatCommitMessage')
 const gitCommit = main.__get__('gitCommit')
 
 test('#formatCommitMessage: title', (t) => {
+  const result = formatCommitMessage({
+    title: 'title',
+  })
+
+  result.title.should.equal('title')
+})
+
+test('#formatCommitMessage: title & type', (t) => {
+  const result = formatCommitMessage({
+    type: 'type',
+    title: 'title',
+  })
+
+  result.title.should.equal('type: title')
+})
+
+test('#formatCommitMessage: title & type & scope', (t) => {
+  const result = formatCommitMessage({
+    scope: 'scope',
+    type: 'type',
+    title: 'title',
+  })
+
+  result.title.should.equal('type(scope): title')
+})
+
+test('#formatCommitMessage: title & emoji', (t) => {
+  const result = formatCommitMessage({
+    gitmoji: ':bug:',
+    title: 'title',
+  })
+
+  result.title.should.equal(':bug: title')
+})
+
+test('#formatCommitMessage: title & type & emoji', (t) => {
+  const result = formatCommitMessage({
+    type: 'type',
+    gitmoji: ':bug:',
+    title: 'title',
+  })
+
+  result.title.should.equal(':bug: type: title')
+})
+
+test('#formatCommitMessage: title & type & scope & emoji', (t) => {
   const result = formatCommitMessage({
     scope: 'scope',
     type: 'type',
@@ -17,53 +63,7 @@ test('#formatCommitMessage: title', (t) => {
   result.title.should.equal(':bug: type(scope): title')
 })
 
-test('#formatCommitMessage: title', (t) => {
-  const result = formatCommitMessage({
-    type: 'type',
-    gitmoji: ':bug:',
-    title: 'title',
-  })
-
-  result.title.should.equal(':bug: type: title')
-})
-
-test('#formatCommitMessage: title', (t) => {
-  const result = formatCommitMessage({
-    gitmoji: ':bug:',
-    title: 'title',
-  })
-
-  result.title.should.equal(':bug: title')
-})
-
-test('#formatCommitMessage: title', (t) => {
-  const result = formatCommitMessage({
-    type: 'type',
-    title: 'title',
-  })
-
-  result.title.should.equal('type: title')
-})
-
-test('#formatCommitMessage: title', (t) => {
-  const result = formatCommitMessage({
-    scope: 'scope',
-    type: 'type',
-    title: 'title',
-  })
-
-  result.title.should.equal('type(scope): title')
-})
-
-test('#formatCommitMessage: title', (t) => {
-  const result = formatCommitMessage({
-    title: 'title',
-  })
-
-  result.title.should.equal('title')
-})
-
-test('#formatCommitMessage: body', (t) => {
+test('#formatCommitMessage: body & reference', (t) => {
   const result = formatCommitMessage({
     reference: '1',
     body: 'body',
@@ -72,7 +72,7 @@ test('#formatCommitMessage: body', (t) => {
   result.body.should.equal('body\n\nClose #1')
 })
 
-test('#formatCommitMessage: body', (t) => {
+test('#formatCommitMessage: body with empty reference', (t) => {
   const result = formatCommitMessage({
     reference: '',
     body: 'body',
@@ -81,7 +81,7 @@ test('#formatCommitMessage: body', (t) => {
   result.body.should.equal('body')
 })
 
-test('#formatCommitMessage: body', (t) => {
+test('#formatCommitMessage: empty body', (t) => {
   const result = formatCommitMessage({
     reference: '1',
     body: '',
@@ -90,7 +90,7 @@ test('#formatCommitMessage: body', (t) => {
   result.body.should.equal('Close #1')
 })
 
-test('#gitCommit', (t) => {
+test('#gitCommit: title + body', (t) => {
   const result = gitCommit({
     title: 'title',
     body: 'body',
@@ -99,7 +99,7 @@ test('#gitCommit', (t) => {
   result.should.be.equal('git commit -m "title" -m "body"')
 })
 
-test('#gitCommit', (t) => {
+test('#gitCommit: title', (t) => {
   const result = gitCommit({
     title: 'title',
     body: '',
@@ -108,7 +108,7 @@ test('#gitCommit', (t) => {
   result.should.be.equal('git commit -m "title" -m ""')
 })
 
-test('#gitCommit', (t) => {
+test('#gitCommit: title + body + sign', (t) => {
   const result = gitCommit({
     title: 'title',
     body: 'body',

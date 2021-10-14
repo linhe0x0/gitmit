@@ -107,7 +107,7 @@ const gitCommit = function gitCommit(options) {
     command.push('-s', '-S')
   }
 
-  command.push('-m', title, '-m', body)
+  command.push('-m', `"${title}"`, '-m', `"${body}"`)
 
   // test environment
   if (TEST_ENV) {
