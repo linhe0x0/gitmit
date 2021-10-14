@@ -25,6 +25,10 @@
   "bin": {
     "gitmit": "bin/gitmit"
   },
+  "files": [
+    "bin",
+    "src"
+  ],
   "scripts": {
     "test": "NODE_ENV='testing' ava",
     "cover": "NODE_ENV='testing' nyc ava",
