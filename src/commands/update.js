@@ -4,7 +4,8 @@ const axios = require('axios')
 const ora = require('ora')
 const util = require('../utils/util')
 
-const rawUrl = 'https://raw.githubusercontent.com/sqrthree/gitmit/master/src/data/gitmojis.json'
+const rawUrl =
+  'https://raw.githubusercontent.com/sqrthree/gitmit/master/src/data/gitmojis.json'
 const cacheFile = path.resolve(__dirname, '../data/gitmojis.json')
 
 axios.defaults.timeout = 5000
@@ -17,18 +18,21 @@ const update = function update() {
 
   spinner.start()
 
-  axios.get(rawUrl).then((res) => {
-    const data = JSON.stringify(res.data, null, 2)
+  axios
+    .get(rawUrl)
+    .then((res) => {
+      const data = JSON.stringify(res.data, null, 2)
 
-    fs.writeFile(cacheFile, data, (err) => {
-      if (err) throw err
+      fs.writeFile(cacheFile, data, (err) => {
+        if (err) throw err
 
-      spinner.succeed('Fetch data successfully.')
+        spinner.succeed('Fetch data successfully.')
+      })
     })
-  }).catch((err) => {
-    spinner.fail('Failed to fetch data.')
-    util.print(err, 'error')
-  })
+    .catch((err) => {
+      spinner.fail('Failed to fetch data.')
+      util.print(err, 'error')
+    })
 }
 
 module.exports = update

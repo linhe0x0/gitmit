@@ -2,7 +2,7 @@ const fuzzy = require('fuzzy')
 const { gitmojis } = require('../data/gitmojis')
 
 const mapGitmojisToChoices = function mapGitmojisToChoices(data) {
-  return data.map(item => ({
+  return data.map((item) => ({
     name: `${item.emoji}  - ${item.description}`,
     value: item.code,
     short: `${item.emoji}  - ${item.description}`,
@@ -21,9 +21,11 @@ const searchEmoji = function searchEmoji(answers, input) {
       },
     })
 
-    resolve(fuzzyResult.map(function map(el) {
-      return el.original
-    }))
+    resolve(
+      fuzzyResult.map(function map(el) {
+        return el.original
+      })
+    )
   })
 }
 

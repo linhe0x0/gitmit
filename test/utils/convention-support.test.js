@@ -5,7 +5,7 @@ const { test } = require('ava')
 const should = require('should')
 const rewire = require('rewire')
 const del = require('del')
-const conventionSupport = rewire('../../src/utils/convention-support') 
+const conventionSupport = rewire('../../src/utils/convention-support')
 const homedir = os.homedir()
 const cwd = process.cwd()
 
@@ -22,47 +22,64 @@ const mock = {
 
   clean(path) {
     return del(path, {
-      force: true
+      force: true,
     })
-  }
+  },
 }
 
-test.serial('#getConventionalFile: should return current directory if the current directory has file that named .conventional-commit-types.json', async (t) => {
-  const file = await mock.create(path.resolve(cwd, '.conventional-commit-types.json'))
+test.serial(
+  '#getConventionalFile: should return current directory if the current directory has file that named .conventional-commit-types.json',
+  async (t) => {
+    const file = await mock.create(
+      path.resolve(cwd, '.conventional-commit-types.json')
+    )
 
-  const getConventionalFile = conventionSupport.__get__('getConventionalFile')
+    const getConventionalFile = conventionSupport.__get__('getConventionalFile')
 
-  const result = await getConventionalFile()
+    const result = await getConventionalFile()
 
-  await mock.clean(file)
+    await mock.clean(file)
 
-  result.should.equal(file)
-})
+    result.should.equal(file)
+  }
+)
 
-test.serial('#getConventionalFile: should return home directory if the current directory doesn\'t has file that named .conventional-commit-types.json but home directory has.', async (t) => {
-  const file = await mock.create(path.resolve(homedir, '.conventional-commit-types.json'))
+test.serial(
+  "#getConventionalFile: should return home directory if the current directory doesn't has file that named .conventional-commit-types.json but home directory has.",
+  async (t) => {
+    const file = await mock.create(
+      path.resolve(homedir, '.conventional-commit-types.json')
+    )
 
-  const getConventionalFile = conventionSupport.__get__('getConventionalFile')
+    const getConventionalFile = conventionSupport.__get__('getConventionalFile')
 
-  const result = await getConventionalFile()
+    const result = await getConventionalFile()
 
-  await mock.clean(file)
+    await mock.clean(file)
 
-  result.should.equal(file)
-})
+    result.should.equal(file)
+  }
+)
 
-test.serial('#getConventionalFile: should return current directory if both current directory and home directory have file that named .conventional-commit-types.json', async (t) => {
-  const home = await mock.create(path.resolve(homedir, '.conventional-commit-types.json'))
-  const current = await mock.create(path.resolve(cwd, '.conventional-commit-types.json'))
+test.serial(
+  '#getConventionalFile: should return current directory if both current directory and home directory have file that named .conventional-commit-types.json',
+  async (t) => {
+    const home = await mock.create(
+      path.resolve(homedir, '.conventional-commit-types.json')
+    )
+    const current = await mock.create(
+      path.resolve(cwd, '.conventional-commit-types.json')
+    )
 
-  const getConventionalFile = conventionSupport.__get__('getConventionalFile')
+    const getConventionalFile = conventionSupport.__get__('getConventionalFile')
 
-  const result = await getConventionalFile()
+    const result = await getConventionalFile()
 
-  await mock.clean([home, current])
+    await mock.clean([home, current])
 
-  result.should.equal(current)
-})
+    result.should.equal(current)
+  }
+)
 
 test.serial('#conventionSupport: ', async (t) => {
   const result = await conventionSupport()
@@ -81,7 +98,7 @@ test('#mapTypesToChoices: should get an error if the parameter types is not defi
 
 test('#mapTypesToChoices: should get an Array if the parameter types is defined', (t) => {
   const mapTypesToChoices = conventionSupport.__get__('mapTypesToChoices')
-  const result = mapTypesToChoices({ "feat": { "description": "A new feature" } })
+  const result = mapTypesToChoices({ feat: { description: 'A new feature' } })
 
   result.should.be.an.Array()
 })
@@ -95,7 +112,11 @@ test('#mapScopesToTips: should return an empty string if the parameter is not de
 
 test('#mapScopesToTips: should return an string if the parameter is defined', (t) => {
   const mapScopesToTips = conventionSupport.__get__('mapScopesToTips')
-  const result = mapScopesToTips({ "a": "1" })
+  const result = mapScopesToTips({ a: '1' })
 
-  result.should.be.not.empty().which.is.a.String().and.startWith('(').and.endWith(')')
+  result.should.be.not
+    .empty()
+    .which.is.a.String()
+    .and.startWith('(')
+    .and.endWith(')')
 })

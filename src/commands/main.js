@@ -9,7 +9,7 @@ const gitmojiSupport = require('../utils/gitmoji-support')
 const conventionSupport = require('../utils/convention-support')
 const util = require('../utils/util')
 
-const TEST_ENV = (process.env.NODE_ENV === 'testing')
+const TEST_ENV = process.env.NODE_ENV === 'testing'
 
 const questions = [
   {
@@ -154,7 +154,11 @@ const main = function main(options) {
     const isGitRepo = yield util.isGitRepo(cwd)
 
     if (!isGitRepo) {
-      return Promise.reject(new Error(`This operation must be run in a work tree.\nCurrent working directory "${cwd}" is outside of the work tree of the repository.`))
+      return Promise.reject(
+        new Error(
+          `This operation must be run in a work tree.\nCurrent working directory "${cwd}" is outside of the work tree of the repository.`
+        )
+      )
     }
 
     if (!options.byHook) {
@@ -185,23 +189,26 @@ const main = function main(options) {
     }
 
     return yield inquirer.prompt(questions)
-  }).then((answers) => {
-    if (!answers.confirm) return Promise.reject(new Error('Aborting commit.'))
-
-    if (options.byHook) {
-      const COMMIT_EDITMSG = options.args[options.args.length - 1]
-      return gitHook(answers, COMMIT_EDITMSG)
-    }
-
-    return gitCommit(answers)
-  }).then((result) => {
-    // Variable result will have value when exec git command.
-    if (result) {
-      util.print(result.stdout, 'success')
-    }
-  }).catch((err) => {
-    util.print(err.message, 'error')
   })
+    .then((answers) => {
+      if (!answers.confirm) return Promise.reject(new Error('Aborting commit.'))
+
+      if (options.byHook) {
+        const COMMIT_EDITMSG = options.args[options.args.length - 1]
+        return gitHook(answers, COMMIT_EDITMSG)
+      }
+
+      return gitCommit(answers)
+    })
+    .then((result) => {
+      // Variable result will have value when exec git command.
+      if (result) {
+        util.print(result.stdout, 'success')
+      }
+    })
+    .catch((err) => {
+      util.print(err.message, 'error')
+    })
 }
 
 module.exports = main

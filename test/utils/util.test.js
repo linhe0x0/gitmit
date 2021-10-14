@@ -11,7 +11,10 @@ const existentJSONFile = path.resolve(process.cwd(), 'existent.json')
 const otherJSONFile = path.resolve(process.cwd(), 'other.json')
 const syntaxErrorFile = path.resolve(process.cwd(), 'syntax-error.json')
 const hookFileWithContent = path.resolve(process.cwd(), 'hook-with-content')
-const hookFileWithoutContent = path.resolve(process.cwd(), 'hook-without-content')
+const hookFileWithoutContent = path.resolve(
+  process.cwd(),
+  'hook-without-content'
+)
 const gitRepo = path.resolve(process.cwd(), 'git-repo')
 
 test.before('mock file', (t) => {
@@ -74,7 +77,9 @@ test('#readFile: should get an error if read a JSON file with parameter 1', asyn
 })
 
 test('#writeFile: ', async (t) => {
-  const error = await t.throws(util.writeFile(existentJSONFile, 'test', { flag: 'wx' }))
+  const error = await t.throws(
+    util.writeFile(existentJSONFile, 'test', { flag: 'wx' })
+  )
 
   t.is(error.code, 'EEXIST')
 })
@@ -111,7 +116,9 @@ test('#isGitRepo: should return true if is in a git directory.', async (t) => {
 })
 
 test('#isGitRepo: should return false if is not in a git directory.', async (t) => {
-  const result = await util.isGitRepo(path.resolve(process.cwd(), 'not-a-git-repo'))
+  const result = await util.isGitRepo(
+    path.resolve(process.cwd(), 'not-a-git-repo')
+  )
 
   t.false(result)
 })

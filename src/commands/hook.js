@@ -26,23 +26,30 @@ const init = function init(options) {
   ].join('\n')
 
   // check if the file exists.
-  util.exists(hookFilePath).then((result) => {
-    if (result) {
-      // check if gitmit hook exists when file "prepare-commit-msg" is existent.
-      return util.checkIfHookExists(hookFilePath)
-    }
+  util
+    .exists(hookFilePath)
+    .then((result) => {
+      if (result) {
+        // check if gitmit hook exists when file "prepare-commit-msg" is existent.
+        return util.checkIfHookExists(hookFilePath)
+      }
 
-    return false
-  }).then((exist) => {
-    if (exist) {
-      throw new Error('gitmit hook is existent.')
-    }
+      return false
+    })
+    .then((exist) => {
+      if (exist) {
+        throw new Error('gitmit hook is existent.')
+      }
 
-    // Add gitmit hook to file "prepare-commit-msg"
-    return util.writeFile(hookFilePath, hookFileContent, { mode: 0o775, flag: 'a+' })
-  }).then(() => {
-    util.print('gitmit commit hook created succesfully.', 'success')
-  })
+      // Add gitmit hook to file "prepare-commit-msg"
+      return util.writeFile(hookFilePath, hookFileContent, {
+        mode: 0o775,
+        flag: 'a+',
+      })
+    })
+    .then(() => {
+      util.print('gitmit commit hook created succesfully.', 'success')
+    })
     .catch((err) => {
       util.print(err, 'error')
     })
@@ -52,17 +59,21 @@ const init = function init(options) {
  * Remove gitmit to git commit hook.
  */
 const remove = function remove() {
-  util.readFile(hookFilePath).then((data) => {
-    const regexp = /#\s<gitmit-hook>(?:.*\n)*#\s<\/gitmit-hook>/g
+  util
+    .readFile(hookFilePath)
+    .then((data) => {
+      const regexp = /#\s<gitmit-hook>(?:.*\n)*#\s<\/gitmit-hook>/g
 
-    const cont = data.replace(regexp, '')
+      const cont = data.replace(regexp, '')
 
-    return util.writeFile(hookFilePath, cont)
-  }).then(() => {
-    util.print('Remove gitmit hook succesfully.', 'success')
-  }).catch((err) => {
-    util.print(err, 'error')
-  })
+      return util.writeFile(hookFilePath, cont)
+    })
+    .then(() => {
+      util.print('Remove gitmit hook succesfully.', 'success')
+    })
+    .catch((err) => {
+      util.print(err, 'error')
+    })
 }
 
 /**

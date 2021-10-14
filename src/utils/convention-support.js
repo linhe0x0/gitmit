@@ -64,16 +64,19 @@ const conventionSupport = co.wrap(function* conventionSupport() {
   const typeChoices = mapTypesToChoices(conventional.types)
   const scopeTips = mapScopesToTips(conventional.scopes)
 
-  return [{
-    type: 'list',
-    name: 'type',
-    message: 'Select the type of change that you\'re committing:',
-    choices: typeChoices,
-  }, {
-    type: 'input',
-    name: 'scope',
-    message: `Denote the scope of this change ${scopeTips}:`,
-  }]
+  return [
+    {
+      type: 'list',
+      name: 'type',
+      message: "Select the type of change that you're committing:",
+      choices: typeChoices,
+    },
+    {
+      type: 'input',
+      name: 'scope',
+      message: `Denote the scope of this change ${scopeTips}:`,
+    },
+  ]
 })
 
 module.exports = conventionSupport

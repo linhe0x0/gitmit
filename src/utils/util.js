@@ -1,5 +1,4 @@
 const fs = require('fs')
-const p = require('path')
 const childProcess = require('child_process')
 const chalk = require('chalk')
 
@@ -35,7 +34,8 @@ exports.readFile = function readFile(path, parse) {
 
       if (parse === undefined) return resolve(data)
 
-      if (typeof parse !== 'function') return reject(new Error('parameter parse is not a function.'))
+      if (typeof parse !== 'function')
+        return reject(new Error('parameter parse is not a function.'))
 
       /* eslint no-shadow: ["error", { allow: ["err"] }] */
       try {
@@ -103,20 +103,23 @@ exports.getHookFilePath = function getHookFilePath() {
  * @param  {String}  dir
  * @return {Promise}
  */
-exports.isGitRepo = function isGitDirectory(dir) {
-  return new Promise(function (resolve, reject) {
-    childProcess.exec('git rev-parse --is-inside-work-tree', function (err, stdout, stderr) {
-      if (err) return reject(err)
+exports.isGitRepo = function isGitDirectory() {
+  return new Promise((resolve, reject) => {
+    childProcess.exec(
+      'git rev-parse --is-inside-work-tree',
+      (err, stdout, stderr) => {
+        if (err) return reject(err)
 
-      if (stderr) return reject(new Error(stderr))
+        if (stderr) return reject(new Error(stderr))
 
-      return resolve(/true/.test(stdout))
-    })
+        return resolve(/true/.test(stdout))
+      }
+    )
   })
 }
 
 exports.print = function print(message, type = 'defaults') {
-  const TEST_ENV = (process.env.NODE_ENV === 'testing')
+  const TEST_ENV = process.env.NODE_ENV === 'testing'
 
   const types = {
     defaults: 'gray',

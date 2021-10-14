@@ -11,7 +11,7 @@ test('#formatCommitMessage: title', (t) => {
     scope: 'scope',
     type: 'type',
     gitmoji: ':bug:',
-    title: 'title'
+    title: 'title',
   })
 
   result.title.should.equal(':bug: type(scope): title')
@@ -21,7 +21,7 @@ test('#formatCommitMessage: title', (t) => {
   const result = formatCommitMessage({
     type: 'type',
     gitmoji: ':bug:',
-    title: 'title'
+    title: 'title',
   })
 
   result.title.should.equal(':bug: type: title')
@@ -30,7 +30,7 @@ test('#formatCommitMessage: title', (t) => {
 test('#formatCommitMessage: title', (t) => {
   const result = formatCommitMessage({
     gitmoji: ':bug:',
-    title: 'title'
+    title: 'title',
   })
 
   result.title.should.equal(':bug: title')
@@ -39,7 +39,7 @@ test('#formatCommitMessage: title', (t) => {
 test('#formatCommitMessage: title', (t) => {
   const result = formatCommitMessage({
     type: 'type',
-    title: 'title'
+    title: 'title',
   })
 
   result.title.should.equal('type: title')
@@ -49,7 +49,7 @@ test('#formatCommitMessage: title', (t) => {
   const result = formatCommitMessage({
     scope: 'scope',
     type: 'type',
-    title: 'title'
+    title: 'title',
   })
 
   result.title.should.equal('type(scope): title')
@@ -57,7 +57,7 @@ test('#formatCommitMessage: title', (t) => {
 
 test('#formatCommitMessage: title', (t) => {
   const result = formatCommitMessage({
-    title: 'title'
+    title: 'title',
   })
 
   result.title.should.equal('title')
@@ -66,7 +66,7 @@ test('#formatCommitMessage: title', (t) => {
 test('#formatCommitMessage: body', (t) => {
   const result = formatCommitMessage({
     reference: '1',
-    body: 'body'
+    body: 'body',
   })
 
   result.body.should.equal('body\n\nClose #1')
@@ -75,7 +75,7 @@ test('#formatCommitMessage: body', (t) => {
 test('#formatCommitMessage: body', (t) => {
   const result = formatCommitMessage({
     reference: '',
-    body: 'body'
+    body: 'body',
   })
 
   result.body.should.equal('body')
@@ -84,7 +84,7 @@ test('#formatCommitMessage: body', (t) => {
 test('#formatCommitMessage: body', (t) => {
   const result = formatCommitMessage({
     reference: '1',
-    body: ''
+    body: '',
   })
 
   result.body.should.equal('Close #1')
@@ -93,7 +93,7 @@ test('#formatCommitMessage: body', (t) => {
 test('#gitCommit', (t) => {
   const result = gitCommit({
     title: 'title',
-    body: 'body'
+    body: 'body',
   })
 
   result.should.be.equal('git commit -m "title" -m "body"')
@@ -102,7 +102,7 @@ test('#gitCommit', (t) => {
 test('#gitCommit', (t) => {
   const result = gitCommit({
     title: 'title',
-    body: ''
+    body: '',
   })
 
   result.should.be.equal('git commit -m "title" -m ""')
@@ -112,7 +112,7 @@ test('#gitCommit', (t) => {
   const result = gitCommit({
     title: 'title',
     body: 'body',
-    signed: true
+    signed: true,
   })
 
   result.should.be.equal('git commit -s -S -m "title" -m "body"')

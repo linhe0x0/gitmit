@@ -9,7 +9,9 @@ const { gitmojis } = require('../data/gitmojis')
 const printMojiList = function printMojiList(data) {
   data.forEach((item) => {
     /* eslint no-console: ["error", { allow: ["log"] }] */
-    console.log(`${item.emoji}  - ${chalk.blue(item.code)} - ${item.description}`)
+    console.log(
+      `${item.emoji}  - ${chalk.blue(item.code)} - ${item.description}`
+    )
   })
 }
 
@@ -20,7 +22,10 @@ const printMojiList = function printMojiList(data) {
  * @param  {Array} keywords
  * @return {Array} result of search.
  */
-const filterGitmojisWithKeywords = function filterGitmojisWithKeywords(data, keywords) {
+const filterGitmojisWithKeywords = function filterGitmojisWithKeywords(
+  data,
+  keywords
+) {
   return data.filter((item) => {
     const words = item.description.toLowerCase()
 
