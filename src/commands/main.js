@@ -101,20 +101,20 @@ const gitCommit = function gitCommit(options) {
   title = util.escapeQuotation(title)
   body = util.escapeQuotation(body)
 
-  let shell = 'git commit '
+  let command = ['commit']
 
   if (options.signed) {
-    shell += `-s -S -m "${title}" -m "${body}"`
-  } else {
-    shell += `-m "${title}" -m "${body}"`
+    command.push('-s', '-S')
   }
 
-  shell = shell.replace(/`/g, '\\`')
+  command.push('-m', title, '-m', body)
 
   // test environment
-  if (TEST_ENV) return shell
+  if (TEST_ENV) {
+    return ['git'].concat(command).join(' ')
+  }
 
-  return execa.shell(shell)
+  return execa('git', command)
 }
 
 /**
