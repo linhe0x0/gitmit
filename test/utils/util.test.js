@@ -1,7 +1,6 @@
 const path = require('path')
 const { test } = require('ava')
 const tempfile = require('tempfile')
-const del = require('del')
 const util = require('../../src/utils/util')
 const mock = require('mock-fs')
 
