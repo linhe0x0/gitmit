@@ -49,13 +49,13 @@ const questions = [
     type: 'confirm',
     name: 'signed',
     message: 'Signed commit with GPG (yes):',
-    default: 'yes',
+    default: false,
   },
   {
     type: 'confirm',
     name: 'confirm',
     message: 'Is this ok? (yes):',
-    default: 'yes',
+    default: true,
   },
 ]
 
