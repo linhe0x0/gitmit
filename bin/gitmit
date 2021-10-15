@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-const program = require('commander')
+const { program } = require('commander')
 const updateNotifier = require('update-notifier')
 const commands = require('../src/commands')
 const pkg = require('../package.json')
@@ -11,11 +11,23 @@ const pkg = require('../package.json')
 /**
  * Add command options.
  */
+program.version(pkg.version)
+
 program
-  .version(pkg.version)
-  .option('-e, --with-emoji', 'start the interactive commit client with emoji support')
-  .option('-c, --with-convention', 'start the interactive commit client with git commit message convention support')
+  .command('commit', {
+    isDefault: true,
+  })
+  .option(
+    '-e, --with-emoji',
+    'start the interactive commit client with emoji support'
+  )
+  .option(
+    '-c, --with-convention',
+    'start the interactive commit client with git commit message convention support'
+  )
   .option('--by-hook')
+  .description('commit changes to git')
+  .action(commands.main)
 
 /**
  * Add command `hook`
@@ -59,13 +71,6 @@ program.on('--help', function () {
 program.parse(process.argv)
 
 /**
- * Run the main function only if gitmit is executed without any options or in hook mode.
- */
-if (program.byHook === true || !program.args.length) {
-  commands.main(program)
-}
-
-/**
  * Checks and inform users if there is an available update.
  */
-updateNotifier({pkg}).notify()
+updateNotifier({ pkg }).notify()
