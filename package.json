@@ -63,7 +63,7 @@
     "prettier": "~2.4.1",
     "rewire": "~4.0.1",
     "should": "~13.2.3",
-    "tempfile": "~2.0.0"
+    "tempfile": "~3.0.0"
   },
   "engines": {
     "node": ">=4.0.0"
