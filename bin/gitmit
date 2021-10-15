@@ -60,12 +60,12 @@ program
  * Output examples when `--help` is used.
  */
 program.on('--help', function () {
-  console.log('  Examples:')
   console.log('')
-  console.log('    $ gitmit')
-  console.log('    $ gitmit -e')
-  console.log('    $ gitmit -c')
-  console.log('    $ gitmit -e -c')
+  console.log('Examples:')
+  console.log('  $ gitmit')
+  console.log('  $ gitmit -e')
+  console.log('  $ gitmit -c')
+  console.log('  $ gitmit -e -c')
 })
 
 program.parse(process.argv)
