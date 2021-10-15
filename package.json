@@ -44,7 +44,7 @@
     "inquirer": "~5.2.0",
     "inquirer-autocomplete-prompt": "~0.12.2",
     "ora": "~5.4.1",
-    "update-notifier": "~2.5.0",
+    "update-notifier": "~5.1.0",
     "word-wrap": "1.2.3"
   },
   "devDependencies": {
