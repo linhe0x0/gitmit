@@ -26,7 +26,7 @@ program
     'start the interactive commit client with git commit message convention support'
   )
   .option('--by-hook')
-  .description('commit changes to git')
+  .description('Commit changes to git')
   .action(commands.main)
 
 /**
