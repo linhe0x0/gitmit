@@ -92,29 +92,38 @@ test('#formatCommitMessage: empty body', (t) => {
 })
 
 test('#gitCommit: title + body', (t) => {
-  const result = gitCommit({
-    title: 'title',
-    body: 'body',
-  })
+  const result = gitCommit(
+    {
+      title: 'title',
+      body: 'body',
+    },
+    true
+  )
 
   result.should.be.equal('git commit -m "title" -m "body"')
 })
 
 test('#gitCommit: title', (t) => {
-  const result = gitCommit({
-    title: 'title',
-    body: '',
-  })
+  const result = gitCommit(
+    {
+      title: 'title',
+      body: '',
+    },
+    true
+  )
 
   result.should.be.equal('git commit -m "title" -m ""')
 })
 
 test('#gitCommit: title + body + sign', (t) => {
-  const result = gitCommit({
-    title: 'title',
-    body: 'body',
-    signed: true,
-  })
+  const result = gitCommit(
+    {
+      title: 'title',
+      body: 'body',
+      signed: true,
+    },
+    true
+  )
 
   result.should.be.equal('git commit -s -S -m "title" -m "body"')
 })

@@ -9,8 +9,6 @@ const gitmojiSupport = require('../utils/gitmoji-support')
 const conventionSupport = require('../utils/convention-support')
 const util = require('../utils/util')
 
-const TEST_ENV = process.env.NODE_ENV === 'testing'
-
 const questions = [
   {
     type: 'input',
@@ -95,7 +93,7 @@ const formatCommitMessage = function formatCommitMessage(options) {
  * @param  {Object} options
  * @return {Promise}
  */
-const gitCommit = function gitCommit(options) {
+const gitCommit = function gitCommit(options, dryRun = false) {
   let { title, body } = formatCommitMessage(options)
 
   title = util.escapeQuotation(title)
@@ -109,8 +107,7 @@ const gitCommit = function gitCommit(options) {
 
   command.push('-m', `"${title}"`, '-m', `"${body}"`)
 
-  // test environment
-  if (TEST_ENV) {
+  if (dryRun) {
     return ['git'].concat(command).join(' ')
   }
 
@@ -188,7 +185,17 @@ const commit = async function commit(options) {
   const answers = await inquirer.prompt(questions)
 
   if (!answers.confirm) {
-    throw new Error('Aborting commit.')
+    util.print('Aborting commit.', 'warning')
+
+    const command = await gitCommit(answers, true)
+
+    util.print(
+      'But you can also commit changes by the following command:',
+      'primary'
+    )
+    util.print(`  ${command}`, 'primary')
+
+    return
   }
 
   if (options.byHook) {
