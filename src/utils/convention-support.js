@@ -1,29 +1,30 @@
 const path = require('path')
 const os = require('os')
-const co = require('co')
 
 const util = require('./util')
 
 const homedir = os.homedir()
 const cwd = process.cwd()
 
-const files = [
-  path.resolve(cwd, '.conventional-commit-types.json'),
-  path.resolve(homedir, '.conventional-commit-types.json'),
-  path.resolve(__dirname, '../data/conventional-commit-types.json'),
-]
+const getConventionalFile = async function getConventionalFile() {
+  const files = [
+    path.resolve(cwd, '.conventional-commit-types.json'),
+    path.resolve(homedir, '.conventional-commit-types.json'),
+    path.resolve(__dirname, '../data/conventional-commit-types.json'),
+  ]
 
-const getConventionalFile = co.wrap(function* getConventionalFile() {
-  for (let i = 0, len = files.length; i < len; i += 1) {
-    const result = yield util.exists(files[i])
+  // eslint-disable-next-line no-restricted-syntax
+  for (const item of files) {
+    // eslint-disable-next-line no-await-in-loop
+    const result = await util.exists(item)
 
     if (result) {
-      return Promise.resolve(files[i])
+      return item
     }
   }
 
   return Promise.reject(new Error('Error: No such file.'))
-})
+}
 
 const mapTypesToChoices = function mapTypesToChoices(types) {
   const choices = []
@@ -57,9 +58,9 @@ const mapScopesToTips = function mapScopesToTips(scopes) {
   return result
 }
 
-const conventionSupport = co.wrap(function* conventionSupport() {
-  const conventionalFile = yield getConventionalFile()
-  const conventional = yield util.readFile(conventionalFile, JSON.parse)
+const conventionSupport = async function conventionSupport() {
+  const conventionalFile = await getConventionalFile()
+  const conventional = await util.readFile(conventionalFile, JSON.parse)
 
   const typeChoices = mapTypesToChoices(conventional.types)
   const scopeTips = mapScopesToTips(conventional.scopes)
@@ -77,6 +78,6 @@ const conventionSupport = co.wrap(function* conventionSupport() {
       message: `Denote the scope of this change ${scopeTips}:`,
     },
   ]
-})
+}
 
 module.exports = conventionSupport

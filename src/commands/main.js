@@ -1,5 +1,4 @@
 const fs = require('fs')
-const co = require('co')
 const inquirer = require('inquirer')
 const inquirerAutocompletePrompt = require('inquirer-autocomplete-prompt')
 const chalk = require('chalk')
@@ -148,67 +147,64 @@ const gitHook = function gitHook(options, COMMIT_EDITMSG) {
  *
  * @param  {Object} options
  */
-const main = function main(options) {
-  co(function* fn() {
-    const cwd = process.cwd()
-    const isGitRepo = yield util.isGitRepo(cwd)
+const commit = async function commit(options) {
+  const cwd = process.cwd()
+  const isGitRepo = await util.isGitRepo(cwd)
 
-    if (!isGitRepo) {
-      return Promise.reject(
-        new Error(
-          `This operation must be run in a work tree.\nCurrent working directory "${cwd}" is outside of the work tree of the repository.`
-        )
-      )
-    }
+  if (!isGitRepo) {
+    throw new Error(
+      `This operation must be run in a work tree.\nCurrent working directory "${cwd}" is outside of the work tree of the repository.`
+    )
+  }
 
-    if (!options.byHook) {
-      // without parameter `--by-hook`
-      // check if hook exists.
-      const hookFilePath = util.getHookFilePath()
-      const hookFileStatus = yield util.exists(hookFilePath)
+  if (!options.byHook) {
+    // without parameter `--by-hook`
+    // check if hook exists.
+    const hookFilePath = util.getHookFilePath()
+    const hookFileStatus = await util.exists(hookFilePath)
 
-      if (hookFileStatus) {
-        const result = yield util.checkIfHookExists(hookFilePath)
+    if (hookFileStatus) {
+      const result = await util.checkIfHookExists(hookFilePath)
 
-        if (result) {
-          throw new Error('gitmit hook is existent. you can run "git commit"')
-        }
-      }
-    }
-
-    if (options.withEmoji) {
-      const gitmojiQuestion = gitmojiSupport()
-
-      questions.unshift(gitmojiQuestion)
-    }
-
-    if (options.withConvention) {
-      const conventionQuestions = yield conventionSupport()
-
-      questions.unshift(...conventionQuestions)
-    }
-
-    return yield inquirer.prompt(questions)
-  })
-    .then((answers) => {
-      if (!answers.confirm) return Promise.reject(new Error('Aborting commit.'))
-
-      if (options.byHook) {
-        const COMMIT_EDITMSG = options.args[options.args.length - 1]
-        return gitHook(answers, COMMIT_EDITMSG)
-      }
-
-      return gitCommit(answers)
-    })
-    .then((result) => {
-      // Variable result will have value when exec git command.
       if (result) {
-        util.print(result.stdout, 'success')
+        throw new Error('gitmit hook is existent. you can run "git commit"')
       }
-    })
-    .catch((err) => {
-      util.print(err.message, 'error')
-    })
+    }
+  }
+
+  if (options.withEmoji) {
+    const gitmojiQuestion = gitmojiSupport()
+
+    questions.unshift(gitmojiQuestion)
+  }
+
+  if (options.withConvention) {
+    const conventionQuestions = await conventionSupport()
+
+    questions.unshift(...conventionQuestions)
+  }
+
+  const answers = await inquirer.prompt(questions)
+
+  if (!answers.confirm) {
+    throw new Error('Aborting commit.')
+  }
+
+  if (options.byHook) {
+    const COMMIT_EDITMSG = options.args[options.args.length - 1]
+
+    return gitHook(answers, COMMIT_EDITMSG)
+  }
+
+  const result = await gitCommit(answers)
+  // Variable result will have value when exec git command.
+  if (result) {
+    util.print(result.stdout, 'success')
+  }
 }
 
-module.exports = main
+module.exports = (options) => {
+  commit(options).catch((err) => {
+    util.print(err.message, 'error')
+  })
+}
