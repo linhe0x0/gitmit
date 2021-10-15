@@ -23,7 +23,8 @@ program
   )
   .option(
     '-c, --with-convention',
-    'start the interactive commit client with git commit message convention support'
+    'start the interactive commit client with git commit message convention support',
+    true
   )
   .option('--by-hook')
   .description('Commit changes to git')
