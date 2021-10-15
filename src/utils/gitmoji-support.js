@@ -1,5 +1,6 @@
 const fuzzy = require('fuzzy')
-const { gitmojis } = require('../data/gitmojis')
+
+const { gitmojis } = require('../data/gitmojis.json')
 
 const mapGitmojisToChoices = function mapGitmojisToChoices(data) {
   return data.map((item) => ({

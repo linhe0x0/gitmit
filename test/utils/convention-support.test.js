@@ -5,6 +5,7 @@ const test = require('ava')
 const should = require('should')
 const rewire = require('rewire')
 const del = require('del')
+
 const conventionSupport = rewire('../../src/utils/convention-support')
 const homedir = os.homedir()
 const cwd = process.cwd()

@@ -4,6 +4,7 @@ const inquirerAutocompletePrompt = require('inquirer-autocomplete-prompt')
 const chalk = require('chalk')
 const execa = require('execa')
 const wrap = require('word-wrap')
+
 const gitmojiSupport = require('../utils/gitmoji-support')
 const conventionSupport = require('../utils/convention-support')
 const util = require('../utils/util')
@@ -100,7 +101,7 @@ const gitCommit = function gitCommit(options) {
   title = util.escapeQuotation(title)
   body = util.escapeQuotation(body)
 
-  let command = ['commit']
+  const command = ['commit']
 
   if (options.signed) {
     command.push('-s', '-S')
@@ -193,7 +194,7 @@ const commit = async function commit(options) {
   if (options.byHook) {
     const COMMIT_EDITMSG = options.args[options.args.length - 1]
 
-    return gitHook(answers, COMMIT_EDITMSG)
+    await gitHook(answers, COMMIT_EDITMSG)
   }
 
   const result = await gitCommit(answers)

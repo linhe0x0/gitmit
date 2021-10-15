@@ -1,6 +1,7 @@
 const test = require('ava')
 const should = require('should')
 const rewire = require('rewire')
+
 const main = rewire('../../src/commands/main')
 
 const formatCommitMessage = main.__get__('formatCommitMessage')

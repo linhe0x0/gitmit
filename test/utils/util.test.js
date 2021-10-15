@@ -2,11 +2,11 @@ const path = require('path')
 const os = require('os')
 const test = require('ava')
 const tempfile = require('tempfile')
-const util = require('../../src/utils/util')
 const mock = require('mock-fs')
 
-const nonexistentFile = tempfile('.json')
+const util = require('../../src/utils/util')
 
+const nonexistentFile = tempfile('.json')
 const existentJSONFile = path.resolve(process.cwd(), 'existent.json')
 const otherJSONFile = path.resolve(process.cwd(), 'other.json')
 const syntaxErrorFile = path.resolve(process.cwd(), 'syntax-error.json')
