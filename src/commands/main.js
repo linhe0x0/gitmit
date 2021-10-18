@@ -105,7 +105,11 @@ const gitCommit = function gitCommit(options, dryRun = false) {
     command.push('-s', '-S')
   }
 
-  command.push('-m', `"${title}"`, '-m', `"${body}"`)
+  command.push('-m', `"${title}"`)
+
+  if (body) {
+    command.push('-m', `"${body}"`)
+  }
 
   if (dryRun) {
     return ['git'].concat(command).join(' ')

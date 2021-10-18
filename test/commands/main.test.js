@@ -112,7 +112,7 @@ test('#gitCommit: title', (t) => {
     true
   )
 
-  result.should.be.equal('git commit -m "title" -m ""')
+  result.should.be.equal('git commit -m "title"')
 })
 
 test('#gitCommit: title + body + sign', (t) => {
