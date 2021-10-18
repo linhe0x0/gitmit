@@ -93,7 +93,11 @@ const formatCommitMessage = function formatCommitMessage(options) {
  * @param  {Object} options
  * @return {Promise}
  */
-const gitCommit = function gitCommit(options, dryRun = false) {
+const gitCommit = function gitCommit(
+  options,
+  extraGitOptions = [],
+  dryRun = false
+) {
   let { title, body } = formatCommitMessage(options)
 
   title = util.escapeQuotation(title)
@@ -109,6 +113,10 @@ const gitCommit = function gitCommit(options, dryRun = false) {
 
   if (body) {
     command.push('-m', `"${body}"`)
+  }
+
+  if (extraGitOptions.length) {
+    command.push(...extraGitOptions)
   }
 
   if (dryRun) {
@@ -149,7 +157,7 @@ const gitHook = function gitHook(options, COMMIT_EDITMSG) {
  *
  * @param  {Object} options
  */
-const commit = async function commit(options) {
+const commit = async function commit(options, extraGitOptions = []) {
   const cwd = process.cwd()
   const isGitRepo = await util.isGitRepo(cwd)
 
@@ -191,7 +199,7 @@ const commit = async function commit(options) {
   if (!answers.confirm) {
     util.print('Aborting commit.', 'warning')
 
-    const command = await gitCommit(answers, true)
+    const command = await gitCommit(answers, extraGitOptions, true)
 
     util.print(
       'But you can also commit changes by the following command:',
@@ -208,15 +216,15 @@ const commit = async function commit(options) {
     await gitHook(answers, COMMIT_EDITMSG)
   }
 
-  const result = await gitCommit(answers)
+  const result = await gitCommit(answers, extraGitOptions)
   // Variable result will have value when exec git command.
   if (result) {
     util.print(result.stdout, 'success')
   }
 }
 
-module.exports = (options) => {
-  commit(options).catch((err) => {
+module.exports = (options, extraGitOptions) => {
+  commit(options, extraGitOptions).catch((err) => {
     util.print(err.message, 'error')
   })
 }

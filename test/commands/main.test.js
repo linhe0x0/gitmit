@@ -97,6 +97,7 @@ test('#gitCommit: title + body', (t) => {
       title: 'title',
       body: 'body',
     },
+    [],
     true
   )
 
@@ -109,6 +110,7 @@ test('#gitCommit: title', (t) => {
       title: 'title',
       body: '',
     },
+    [],
     true
   )
 
@@ -122,8 +124,25 @@ test('#gitCommit: title + body + sign', (t) => {
       body: 'body',
       signed: true,
     },
+    [],
     true
   )
 
   result.should.be.equal('git commit -s -S -m "title" -m "body"')
+})
+
+test('#gitCommit: title + extra git options', (t) => {
+  const result = gitCommit(
+    {
+      title: 'title',
+      body: 'body',
+      signed: true,
+    },
+    ['--no-verify', '--author', 'example_user'],
+    true
+  )
+
+  result.should.be.equal(
+    'git commit -s -S -m "title" -m "body" --no-verify --author example_user'
+  )
 })
