@@ -1,6 +1,5 @@
 const chalk = require('chalk')
-
-const { gitmojis } = require('../data/gitmojis.json')
+const { gitmojis } = require('gitmojis')
 
 /**
  * Output emoji list.
