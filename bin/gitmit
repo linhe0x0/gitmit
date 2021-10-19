@@ -57,14 +57,6 @@ program
   .action(commands.hook)
 
 /**
- * Add command `update`
- */
-program
-  .command('update')
-  .description('Sync emoji list with the repo.')
-  .action(commands.update)
-
-/**
  * Add command `search`
  */
 program
