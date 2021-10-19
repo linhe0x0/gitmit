@@ -109,10 +109,10 @@ const gitCommit = function gitCommit(
     command.push('-s', '-S')
   }
 
-  command.push('-m', `"${title}"`)
+  command.push('-m', dryRun ? `"${title}"` : title)
 
   if (body) {
-    command.push('-m', `"${body}"`)
+    command.push('-m', dryRun ? `"${body}"` : body)
   }
 
   if (extraGitOptions.length) {
