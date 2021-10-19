@@ -29,6 +29,9 @@
     "bin",
     "src"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "test": "NODE_ENV='testing' ava",
     "cover": "NODE_ENV='testing' nyc ava",
