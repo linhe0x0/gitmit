@@ -60,6 +60,7 @@ Also, you can use `gitmit` with both `-c` and `-e`
 ```
 $ gitmit -c -e
 ```
+
 ### Custom your own conventions
 
 Default, we will use [AngularJS's commit message convention](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). but you can custom your own conventions with a `.conventional-commit-types.json` file.
@@ -68,7 +69,6 @@ If your project directory has a `.conventional-commit-types.json` file such as [
 
 If you want to keep it wherever you are, yon can create a `.conventional-commit-types.json` file in your home directory, `gitmit` will autoload it.
 
-
 ### search emoji
 
 Search using specific keywords to find the right gitmoji.
@@ -76,12 +76,6 @@ Search using specific keywords to find the right gitmoji.
 ```
 $ gitmit search bug
 $ gitmit search bug lint
-```
-
-### update emoji
-
-```
-$ gitmit update
 ```
 
 ### Hook support
