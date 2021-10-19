@@ -25,17 +25,17 @@
   "bin": {
     "gitmit": "bin/gitmit"
   },
+  "scripts": {
+    "test": "NODE_ENV='testing' ava",
+    "cover": "NODE_ENV='testing' nyc ava",
+    "lint": "eslint src --cache"
+  },
   "files": [
     "bin",
     "src"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  },
-  "scripts": {
-    "test": "NODE_ENV='testing' ava",
-    "cover": "NODE_ENV='testing' nyc ava",
-    "lint": "eslint src --cache"
   },
   "dependencies": {
     "axios": "~0.23.0",
