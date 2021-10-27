@@ -38,7 +38,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "axios": "~0.23.0",
+    "axios": "~0.24.0",
     "chalk": "~4.1.2",
     "commander": "~8.2.0",
     "execa": "~5.1.1",
